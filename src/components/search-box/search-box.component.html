@@ -1,0 +1,63 @@
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <input type="text" placeholder="Buscar por:" class="form-control" id="search" [(ngModel)]="form.search">
+    </div>
+    <div class="form-group col-md-4">
+        <input type="text" placeholder="Bloquear:" class="form-control" id="block" [(ngModel)]="form.block">
+    </div>
+    <div class="form-group col-md-2">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="stock" [(ngModel)]="form.stock">
+            <label class="form-check-label" for="gridCheck">
+                Apenas em estoque
+            </label>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <button type="button" (click)="search()" [disabled]="form.search.length < 3" class="btn btn-primary pull-right">Buscar produtos</button>
+    </div>
+</div>
+
+<div *ngIf="products.top.length > 0">
+    <h2>Top 10</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Produto</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Em estoque</th>
+                <th scope="col">Loja</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products.top">
+                <th scope="row">{{product.product}}</th>
+                <td>{{product.price | currency}}</td>
+                <td>{{product.stock ? 'Sim' : 'Não'}}</td>
+                <td>{{product.store}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="products.products.length > 0">
+    <h2>Produtos</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Produto</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Em estoque</th>
+                <th scope="col">Loja</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products.products">
+                <th scope="row">{{product.product}}</th>
+                <td>{{product.price | currency}}</td>
+                <td>{{product.stock ? 'Sim' : 'Não'}}</td>
+                <td>{{product.store}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
