@@ -13,6 +13,8 @@ import { routing } from './app.routing';
 
 import { HomePageComponent } from '../pages/home/home.component';
 import { TableComponent } from '../components/table/table.component';
+import { FilterPipe } from '../pipe/filter-currency.pipe';
+import { FilterLojas } from '../pipe/filter-lojas.pipe';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { TableComponent } from '../components/table/table.component';
     AppComponent,
     SearchBoxComponent,
     TableComponent,
+    FilterPipe,
+    FilterLojas,
 
     HomePageComponent
   ],

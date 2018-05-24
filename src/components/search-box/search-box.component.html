@@ -19,45 +19,64 @@
 </div>
 
 <div *ngIf="products.top.length > 0">
-    <h2>Top 10</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Produto</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Em estoque</th>
-                <th scope="col">Loja</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products.top">
-                <th scope="row">{{product.product}}</th>
-                <td>{{product.price | currency}}</td>
-                <td>{{product.stock ? 'Sim' : 'Não'}}</td>
-                <td>{{product.store}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h2 class="mt-4">Top 10</h2>
+
+    <div class="row">    
+        <div class="col-sm-6 col-md-4 col-lg-3 mt-4" *ngFor="let product of products.top">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">{{product.product}}</h4>
+                    <div class="meta">
+                        <!-- <a href="#">{{product.store}}</a> -->
+                    </div>
+                    <div class="card-text">
+                        {{product.stock ? 'Em estoque' : 'Sem estoque'}}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="float-right">{{product.price | currency}}</span>
+                    <span><i class=""></i>{{product.store}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="products.products.length > 0">
-    <h2>Produtos</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Produto</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Em estoque</th>
-                <th scope="col">Loja</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products.products">
-                <th scope="row">{{product.product}}</th>
-                <td>{{product.price | currency}}</td>
-                <td>{{product.stock ? 'Sim' : 'Não'}}</td>
-                <td>{{product.store}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h2 class="mt-4">Produtos</h2>
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <input [(ngModel)]="moneyRange" type="range" min="1" step="1" max="100">
+        </div>
+        <div class="col-12 col-md-9">
+            <div class="row">
+                <label *ngFor="let option of lojas" class="col-12 col-md-4">
+                    <input type="checkbox"
+                            name="options"
+                            [(ngModel)]="option.checked"/>
+                    {{option.name}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">    
+        <div class="col-sm-6 col-md-4 col-lg-3 mt-4" *ngFor="let product of products.products | filtercurrency : moneyRange ">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">{{product.product}}</h4>
+                    <div class="meta">
+                        <!-- <a href="#">{{product.store}}</a> -->
+                    </div>
+                    <div class="card-text">
+                        {{product.stock ? 'Em estoque' : 'Sem estoque'}}
+                        <input type="checkbox" />
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="float-right">{{product.price | currency}}</span>
+                    <span><i class=""></i>{{product.store}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

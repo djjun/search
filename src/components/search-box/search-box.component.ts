@@ -17,11 +17,16 @@ export class SearchBoxComponent {
         products: []
     };
 
+    private lojas:any = [];
+    private allLojas:any = [];
+
     private form = {
         search : '',
         block : '',
         stock : true
     }
+
+    private moneyRange:number = 100;
 
     constructor(
         private http : Api
@@ -38,7 +43,26 @@ export class SearchBoxComponent {
                 this.products.top = data['top10'].map(data => new ProductModel(data));
                 this.products.products = data['products'].map(data => new ProductModel(data));
 
+                this.filterLojas(this.products.products);
+
             })
+    }
+
+    filterLojas(data) {
+        let arrayLojas = [];
+
+        data.map( value => {
+            if(arrayLojas.indexOf(value.store) < 0 ) {
+                arrayLojas.push(value.store);
+            } 
+        })
+
+        arrayLojas.map( value => {
+            this.lojas.push({
+                name: value,
+                checked: false
+            })
+        });
     }
 
 }
